@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+
+  <mat-sidenav class="customizer" align="end" mode="over" #customizer>
+    <stbui-customizer (theme)="onTheme($event)"></stbui-customizer>
+  </mat-sidenav>
+
+  <mat-sidenav class="sidenav" align="start" [mode]="sidenavMode" [opened]="sidenavOpen" #sidenav>
+    <app-sidenav [theme]="theme"></app-sidenav>
+  </mat-sidenav>
+
+  <div class="sidenav-container" fxLayout="column">
+    <stbui-header [theme]="theme" [customizer]="customizer" [sidenav]="sidenav"></stbui-header>
+
+    <div class="main-container" #scrollContainer>
+      <router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+      <app-footer></app-footer>
+    </div>
+
+  </div>
+
+</mat-sidenav-container>

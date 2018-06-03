@@ -1,0 +1,47 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="height: 100%;">
+  <div class="register mat-elevation-z12">
+    <div class="register-header" fxLayout="column" fxLayoutAlign="center center">
+      Register an account
+    </div>
+    <form #form="ngForm" [formGroup]="signUpForm" (ngSubmit)="register()">
+      <div class="register-content" fxLayout="column" fxLayoutAlign="start stretch">
+      <mat-slide-toggle  
+          [color]="color"
+          [checked]="checked"
+          [disabled]="disabled"
+          [labelPosition]='labelPosition'>
+        Student!
+      </mat-slide-toggle>
+        <mat-input-container>
+          <input matInput placeholder="First Name" type="text" name="firstname" formControlName="firstname" required >
+          <mat-error>{{ formErrors.firstName }}</mat-error>
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput placeholder="Last Name" type="text" name="lastname" formControlName="lastname" required >
+          <mat-error>{{ formErrors.lastName }}</mat-error>
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput placeholder="User Name" type="text" name="username" formControlName="username" required >
+          <mat-error>{{ formErrors.userName }}</mat-error>
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput placeholder="Email" type="text" name="email" formControlName="email" required >
+          <mat-error>{{ formErrors.email }}</mat-error>
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput placeholder="Password" type="password" name="password" formControlName="password" >
+          <mat-error>{{ formErrors.password }}</mat-error>
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput placeholder="Confirm Password" type="password" name="password-confirm" required>
+          <mat-error>{{ formErrors.email }}</mat-error>
+        </mat-input-container>
+        <div class="extra-options" fxLayout="row" fxLayoutAlign="center center">
+          <mat-checkbox class="remember-me">I Agree<a href="javascript:;">Registration Agreement</a></mat-checkbox>
+        </div>
+        <button color="primary" mat-raised-button [disabled]="!form.valid">Create account</button>
+        <p class="note">Already have an account?<br/> <a [routerLink]="['/sigin']">log in</a></p>
+      </div>
+    </form>
+  </div>
+</div>

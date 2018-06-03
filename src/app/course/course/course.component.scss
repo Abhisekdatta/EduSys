@@ -1,0 +1,49 @@
+.mat-card{
+    margin: 20px;
+}
+
+.mat-card-title{
+    min-height: 56px;
+    max-height: 56px;
+  }
+
+.full-width {
+    width: 100%;
+}
+.half-width {
+    width: 49%;
+}
+
+.buttonDiv{
+    display: flex;
+}
+
+.rightArrow{
+    flex: 1;
+    align-content: right;
+}
+
+.divPadding{
+    padding-top: 20px;
+    margin-top: 20px;
+    border: 1px solid;
+    border-bottom-color : red;
+}
+.mat-input-element{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mat-expansion-panel-header{
+    background-color: yellowgreen;
+}
+.mat-expansion-panel-header-title, 
+.mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+

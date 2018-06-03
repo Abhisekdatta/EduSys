@@ -1,0 +1,129 @@
+
+<mat-card class="mat-card">
+        
+    <mat-card-title class="mat-card-title">
+            <mat-toolbar color="primary">
+                School List
+                <span fxFlex></span>
+                <div *ngIf="!selection.isEmpty() && selection.selected.length==1">
+                    <button mat-icon-button >
+                        <mat-icon matTooltip="Edit" (click)="editEntity()">edit</mat-icon>
+                </button>
+                </div>
+                <div *ngIf="!selection.isEmpty()">
+                <button mat-icon-button (click)="deleteEntity()">
+                    <mat-icon matTooltip="Delete">delete</mat-icon>
+                </button>
+                    </div>
+                    <!-- <button mat-icon-button >
+                            <mat-icon matTooltip="Details">details</mat-icon>
+                    </button> -->
+                
+                
+                <button mat-mini-fab color="accent" (click)="openEntityDailog()" *ngIf="selection.isEmpty()">
+                    <mat-icon matTooltip="Add School">add</mat-icon>
+                </button>
+            </mat-toolbar>
+            
+    </mat-card-title>
+    <mat-card-content>
+            <mat-input-container floatPlaceholder="never">
+                    <input matInput #filter placeholder="Filter users">
+            </mat-input-container>
+            <!-- <div class="example-header example-selection-header"
+            *ngIf="!selection.isEmpty()">
+                {{selection.selected.length}}
+                {{selection.selected.length == 1 ? 'entityModel' : 'entityModels'}}
+                selected
+            </div> -->
+
+            <section class="example-section" *ngIf="progressBar">
+                    <mat-progress-bar
+                        class="example-margin"
+                        [color]="color"
+                        [mode]="mode"
+                        [value]="value"
+                        [bufferValue]="bufferValue">
+                    </mat-progress-bar>
+            </section>
+        <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+               
+                <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef>
+                          <mat-checkbox (change)="$event ? masterToggle() : null"
+                                       [checked]="isAllSelected()"
+                                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+                          </mat-checkbox>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let entityModel">
+                          <mat-checkbox (click)="$event.stopPropagation()"
+                                       (change)="$event ? selection.toggle(entityModel.id) : null">
+                          </mat-checkbox>
+                          <!-- <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? setEntityId(entityModel.id) : null"
+                            [checked]="selection.isSelected(entityModel.id)"
+                            value="{{entityModel.id}}">
+                           </mat-checkbox> -->
+                        </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="example-section example-margin"> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let entityModel" class="mat-col pointer" (click)="openSnackBar(entityModel)" matTooltip="View Details"> 
+                        {{entityModel.name}} 
+                    </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="example-section example-margin"> Email </mat-header-cell>
+                <mat-cell *matCellDef="let entityModel" class="mat-col"> {{entityModel.email}}</mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="contactNo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Contact No. </mat-header-cell>
+                <mat-cell *matCellDef="let entityModel" > {{entityModel.contactNo}} </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="numberOfUser">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Number of User </mat-header-cell>
+                <mat-cell *matCellDef="let entityModel"> {{entityModel.numberOfUser}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="contractStartDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Contract Start Date </mat-header-cell>
+                    <mat-cell *matCellDef="let entityModel"> {{entityModel.contractStartDate}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="contractEndDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Contract End Date </mat-header-cell>
+                    <mat-cell *matCellDef="let entityModel"> {{entityModel.contractEndDate}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="isActive">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Is Active</mat-header-cell>
+                    <mat-cell *matCellDef="let entityModel"> 
+                        <mat-slide-toggle 
+                                 [checked]="entityModel.active" 
+                                 [color]="color"
+                                 (change)="updateEntityStatus($event.checked,entityModel.id)">
+                        </mat-slide-toggle>
+                    </mat-cell>
+                </ng-container>
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let entityModel; columns: displayedColumns;"
+                [class.example-selected-row]="selection.isSelected(entityModel.id)"
+                (click)="selection.toggle(entityModel.id)"></mat-row>
+                
+        </mat-table>
+
+        <div class="example-no-results"
+        [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+             No School found matching filter.
+         </div>
+
+        <mat-paginator #paginator 
+        [length]="entityDatabase?.totalLength"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="paginate($event)">
+</mat-paginator>
+    </mat-card-content>
+</mat-card>

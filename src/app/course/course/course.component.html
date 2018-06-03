@@ -1,0 +1,142 @@
+
+<mat-card class="mat-card">
+    <mat-card-title class="mat-card-title">
+        <mat-toolbar color="primary">
+            Design Course
+        </mat-toolbar>
+    </mat-card-title>
+    <mat-card-content>
+        <form #form="ngForm" [formGroup]="designCourseForm" (ngSubmit)="createDesignCourse()" fxLayout="column">
+            <mat-horizontal-stepper>
+                <mat-step label="Course" >
+                        <mat-slide-toggle class="full-width"
+                            [color]="color"
+                            [checked]="checked"
+                            [disabled]="disabled"
+                            [labelPosition]='labelPosition'
+                            name='isActive'
+                            formControlName="isActive">
+                        Active!
+                        </mat-slide-toggle>
+                    <mat-input-container>
+                            <input matInput placeholder="Course Code" type="text" name="courseCode" formControlName="courseCode" required >
+                    </mat-input-container>
+                    <mat-input-container>
+                            <input matInput placeholder="Course Name" type="text" name="courseName" formControlName="courseName" required >
+                    </mat-input-container>
+                    <mat-input-container>
+                            <input matInput placeholder="Number Of Classes" type="text" name="noOfClass" formControlName="noOfClass" required>
+                    </mat-input-container>
+                    <div>
+                         <button mat-icon-button matStepperNext><mat-icon matTooltip="Next" (click)="addClass()"> keyboard_tab</mat-icon></button>
+                    </div>
+                </mat-step>
+                <mat-step label="Class & Section ">
+                    <div formArrayName="classes" >
+                        
+                        <div *ngFor="let class of designCourseForm.controls.classes.controls; let i=index"> 
+                           <mat-card>
+                                <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                           {{class.get('className').value}}
+                                          </mat-panel-title>
+                                          <mat-panel-description>
+                                            Type class name, no. of students and number of sections.
+                                            <mat-icon>account_circle</mat-icon>
+                                          </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                            <div [formGroupName]="i">
+                                    <mat-input-container>
+                                            <input matInput placeholder="Name Of Class"  type="text" name="className" formControlName="className"  >
+                                    </mat-input-container>
+                                    <mat-input-container>
+                                            <input matInput placeholder="No. Of Student" type="text" name="noOfStudent" formControlName="noOfStudent"  >
+                                    </mat-input-container>
+                                    <mat-input-container>
+                                            <input matInput placeholder="No. Of Section" type="text" name="noOfSection" 
+                                            (change)="addSection($event.target.value,designCourseForm.controls.classes.controls[i])" 
+                                            formControlName="noOfSection"  >
+                                    </mat-input-container>
+
+                                   <div formArrayName="sections" *ngIf="class.get('noOfSection').value>0">
+                                    
+                                            <mat-expansion-panel>
+                                                <mat-expansion-panel-header>
+                                                  <mat-panel-title>
+                                                    Section Data
+                                                  </mat-panel-title>
+                                                  <mat-panel-description>
+                                                    Type section name , room number etc.
+                                                  </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <div *ngFor="let section of class.controls['sections'].controls; let r=index">
+                                                        <div [formGroupName]="r">
+                                                                <mat-input-container>
+                                                                        <input matInput placeholder="Section Name"  type="text" name="sectionName" formControlName="sectionName"  >
+                                                                </mat-input-container>
+                                                                <mat-input-container>
+                                                                        <input matInput placeholder="Room No" type="text" name="roomNo" formControlName="roomNo"  >
+                                                                </mat-input-container>
+                                                                <mat-input-container>
+                                                                        <input matInput placeholder="No Of Student" type="text" name="noOfStudent" formControlName="noOfStudent"  >
+                                                                        <mat-error>{{ formErrors.noOfStudent }}</mat-error>
+                                                                </mat-input-container>
+                                                                <mat-input-container>
+                                                                        <input matInput placeholder="Section Owner" type="text" name="sectionOwner" formControlName="sectionOwner"  >
+                                                                </mat-input-container>
+                                                                <div>
+                                                                        <button mat-icon-button matStepperNext>
+                                                                                <mat-icon matTooltip="Delete" (click)="deleteSection(r,class)">delete</mat-icon>
+                                                                        </button>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </mat-expansion-panel>
+                                        
+
+                                   </div>
+                            </div>
+                            </mat-expansion-panel>
+                            </mat-card>
+                        </div>
+                    </div>
+                    <div>
+                        <button mat-icon-button matStepperPrevious><mat-icon matTooltip="Back">keyboard_backspace</mat-icon></button>
+                        <button mat-icon-button matStepperNext><mat-icon matTooltip="Next"> keyboard_tab</mat-icon></button>
+                    </div>
+                </mat-step>
+                <mat-step label="Other">
+                        <!-- <div *ngIf="designCourseForm.controls.classes.controls.length > 1">
+                    <div formArrayName="designCourseForm.controls.classes.controls.sections">
+                        
+                                <div *ngFor="let section of designCourseForm.controls.classes.controls[i].sections.controls; let i=index"> 
+                                        <div [formGroupName]="i">
+                                                <mat-input-container>
+                                                        <input matInput placeholder="Section Name"  type="text" name="sectionName" formControlName="sectionName"  >
+                                                </mat-input-container>
+                                                <mat-input-container>
+                                                        <input matInput placeholder="Room No" type="text" name="roomNo" formControlName="roomNo"  >
+                                                </mat-input-container>
+                                        </div>
+                            </div>
+                        </div>
+                       
+                    </div> -->
+                    <div class="buttonDiv">
+                        <button mat-icon-button matStepperPrevious><mat-icon matTooltip="Back">keyboard_backspace</mat-icon></button>
+                        <button mat-icon-button matStepperNext><mat-icon matTooltip="Next"> keyboard_tab</mat-icon></button>
+                    </div>
+                </mat-step>
+                <mat-step label="Session">
+                        Content 2
+                    <div>
+                        <button mat-icon-button matStepperPrevious><mat-icon matTooltip="Back">keyboard_backspace</mat-icon></button>
+                        <button mat-raised-button color="primary">Save</button>
+                    </div>
+                </mat-step>
+                
+            </mat-horizontal-stepper>
+        </form>
+    </mat-card-content>
+</mat-card>

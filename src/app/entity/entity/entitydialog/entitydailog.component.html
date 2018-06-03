@@ -1,0 +1,92 @@
+<div class="main-validation" fxLayout="row" fxLayoutAlign="center">
+<mat-card fxFlex="100">
+    <mat-card-header>
+      <div mat-card-avatar><mat-icon>school</mat-icon></div>
+      <mat-card-title>Create Entity</mat-card-title>
+      <mat-card-subtitle>Entity</mat-card-subtitle>
+    </mat-card-header>
+    <form #form="ngForm" [formGroup]="entityForm" (ngSubmit)="createEntity()" fxLayout="column">
+    <mat-card-content >
+          <mat-slide-toggle  class="half-width"
+          [color]="color"
+          [checked]="checked"
+          [disabled]="disabled"
+          [labelPosition]='labelPosition'
+          name='isActive'
+          formControlName="isActive">
+        Active!
+      </mat-slide-toggle>
+
+        
+
+       <mat-input-container class="half-width">
+          <input matInput placeholder="Entity Type" 
+                 [matAutocomplete]="auto" 
+                 [formControl]="entityTypeCtrl"  
+                 name="entityTypeCtrl"
+                 required >
+        
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)" [displayWith]="displayFn">
+              <mat-option *ngFor="let entityObject of filteredEntities | async"  [value]="entityObject" >
+                  <mat-icon>{{ entityObject.entityImg }}</mat-icon>
+                  <span> {{ entityObject.entityType }}</span>
+              </mat-option>
+           </mat-autocomplete>
+           <mat-error>{{ formErrors.entityType }}</mat-error>
+       </mat-input-container>
+
+
+        <mat-input-container class="full-width">
+          <input matInput placeholder="Entity Name" type="text" name="name" formControlName="name" required >
+          <mat-error>{{ formErrors.name }}</mat-error>
+        </mat-input-container>
+      
+        <mat-input-container class="half-width">
+          <input matInput placeholder="Code" type="text" name="code" formControlName="code" required >
+          <mat-error>{{ formErrors.code }}</mat-error>
+        </mat-input-container>
+      
+        <mat-input-container class="half-width">
+          <input matInput placeholder="Email Address" type="text" name="email" formControlName="email" required >
+          <mat-error>{{ formErrors.email }}</mat-error>
+        </mat-input-container>
+        <mat-input-container class="half-width">
+          <input matInput placeholder="Contact No." type="text" name="contactNo" formControlName="contactNo" required >
+          <mat-error>{{ formErrors.contactNo }}</mat-error>
+        </mat-input-container>
+        <mat-input-container class="half-width">
+          <input matInput placeholder="Fax No." type="text" name="faxNo" formControlName="faxNo" >
+          <mat-error>{{ formErrors.faxNo }}</mat-error>
+        </mat-input-container>
+        <mat-input-container class="full-width">
+          <textarea matInput placeholder="Address Line 1" type="text" name="addressLine1" formControlName="addressLine1" required ></textarea>
+          <mat-error>{{ formErrors.addressLine1 }}</mat-error>
+        </mat-input-container>
+        <mat-input-container class="full-width">
+          <textarea matInput placeholder="Address Line 2" type="text" name="addressLine2" formControlName="addressLine2" ></textarea>
+        </mat-input-container>
+        <mat-input-container class="half-width">
+            <input matInput placeholder="Web Site" type="text" name="webSite" formControlName="webSite" >
+          </mat-input-container>
+          <mat-input-container class="half-width">
+              <input matInput placeholder="Number Of User" type="text" name="numberOfUser" formControlName="numberOfUser" required >
+              <mat-error>{{ formErrors.numberOfUser }}</mat-error>
+            </mat-input-container>
+        <mat-input-container class="half-width">
+          <input matInput [matDatepicker]="contractStartDate" placeholder="Contract Start Date" disabled name="contractStartDate" formControlName="contractStartDate" required >
+          <mat-datepicker-toggle matSuffix [for]="contractStartDate"></mat-datepicker-toggle>
+          <mat-datepicker #contractStartDate disabled="false"></mat-datepicker>
+        </mat-input-container>
+        <mat-input-container class="half-width">
+          <input matInput [matDatepicker]="contractEndDate" placeholder="Contract Start Date" disabled name="contractEndDate" formControlName="contractEndDate" required >
+          <mat-datepicker-toggle matSuffix [for]="contractEndDate"></mat-datepicker-toggle>
+          <mat-datepicker #contractEndDate disabled="false"></mat-datepicker>
+        </mat-input-container>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!form.valid">Save</button>
+      <button mat-raised-button color="accent" (click)="onNoClick()">Close</button>
+    </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

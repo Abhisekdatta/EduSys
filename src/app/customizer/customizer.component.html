@@ -1,0 +1,12 @@
+<div class="customizer-container" fxLayout="column">
+  <mat-radio-group class="customizer-radio-group">
+    <mat-radio-button class="customizer-radio-button" (change)="selectTheme($event, 'dark')" value="dark">Dark</mat-radio-button>
+    <mat-radio-button class="customizer-radio-button" (change)="selectTheme($event, 'light')" value="light">light</mat-radio-button>
+    <mat-radio-button class="customizer-radio-button" (change)="selectTheme($event, 'default')" value="default">Default</mat-radio-button>
+    <mat-radio-button class="customizer-radio-button" (change)="selectTheme($event, 'primary')" value="primary">primary</mat-radio-button>
+    <mat-radio-button class="customizer-radio-button" (change)="selectTheme($event, 'warn')" value="warn">warn</mat-radio-button>
+    <mat-radio-button class="customizer-radio-button" (change)="selectTheme($event, 'accent')" value="accent">accent</mat-radio-button>
+  </mat-radio-group>
+  <!--<mat-checkbox (change)="selectTheme($event, 'dark')" [(ngModel)]="isDark">Dark</mat-checkbox>-->
+  <!--<mat-checkbox (change)="selectTheme($event, 'light')" [(ngModel)]="isLight">light</mat-checkbox>-->
+</div>

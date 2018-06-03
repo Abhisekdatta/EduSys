@@ -1,0 +1,40 @@
+
+
+<mat-card>
+  <mat-card-title>Employee List
+      <button mat-mini-fab color="accent" (click)="openEmployeeDialog()" class="addButton">
+          <mat-icon matTooltip="Add Employee">add</mat-icon>
+      </button>
+  </mat-card-title>
+  <mat-card-content>
+     <mat-table>
+
+      <ng-container matColumnDef="empName">
+            <mat-header-cell *matHeaderCellDef>Employee Name</mat-header-cell>
+            <mat-cell></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="userId">
+          <mat-header-cell *matHeaderCellDef>User Id</mat-header-cell>
+          <mat-cell></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+          <mat-cell></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="typeOfEmp">
+          <mat-header-cell *matHeaderCellDef>Type Of Employee</mat-header-cell>
+          <mat-cell></mat-cell>
+      </ng-container>
+
+     <ng-container matColumnDef="designation">
+        <mat-header-cell *matHeaderCellDef>Designation</mat-header-cell>
+        <mat-cell></mat-cell>
+     </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+     </mat-table>
+  </mat-card-content>
+</mat-card>

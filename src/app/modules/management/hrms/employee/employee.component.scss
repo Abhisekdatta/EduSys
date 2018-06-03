@@ -1,0 +1,27 @@
+.mat-card{
+    display: flex;
+    flex-direction: column;
+    margin:20px;
+    padding: 20px;
+   // color: blue;
+    //background-color:#3f51b5;
+}
+
+.mat-card-title{
+   // margin:20px;
+    padding: 20px;
+    background-color:#3f51b5;
+}
+.mat-card-content{
+    padding: 20px;
+}
+
+.addButton{
+    
+    
+    float: right;
+    transition: .10s ease;
+    top:50%;
+    
+}
+

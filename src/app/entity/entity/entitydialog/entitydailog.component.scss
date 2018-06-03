@@ -1,0 +1,32 @@
+.entitydailog-container {
+    display: flex;
+    flex-direction: column;
+  
+  }
+  .entitydailog-container > * {
+    width: 100%;
+  }
+
+  :host {
+    display: block;
+    margin: 15px 0;
+  }
+  
+  .main-validation {
+    md-card {
+      margin: 15px;
+      width: 100%;
+    }
+  }
+  
+  .extra-options {
+    margin: 16px 0 32px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  .half-width {
+    width: 49%;
+  }
+  

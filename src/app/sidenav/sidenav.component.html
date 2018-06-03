@@ -1,0 +1,25 @@
+<div class="sidenav-container" fxLayout="column">
+
+  <mat-toolbar class="sidenav-toolbar mat-elevation-z2" [ngClass]="[theme.logo]" fxLayout="row"
+              fxFlexAlign="center center">
+    <mat-icon class="logo-icon material-icons">view_compact</mat-icon>
+    <a class="logo-text" href="/">EMS</a>
+    <span fxFlex></span>
+    <button mat-icon-button (click)="toggleIconSidenav()" fxHide="true" fxHide.gt-sm="false" style="display: none">
+      <mat-icon class="icon-sidenav-toggle" [class.rotate]="isIconSidenav()">chevron_left
+      </mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="sidenav-scrollbar-container" [ngClass]="[theme.aside]" fxLayout="column">
+    <mat-nav-list fxLayout="column" [perfect-scrollbar] class="sidenav-list sidenav-toplevel">
+      <sidenav-item *ngFor="let item of items" [item]="item"></sidenav-item>
+    </mat-nav-list>
+  </div>
+
+  <div class="sidenav-footer" [ngClass]="[theme.aside]" fxLayout="row" fxFlexAligin="center center">
+    <a fxFlex="100" mat-raised-button href="https://github.com/stbui/angular-material-app/issues" target="_blank">
+      <mat-icon style="font-size: 20px;">help</mat-icon>
+      Coming Soon</a>
+  </div>
+</div>

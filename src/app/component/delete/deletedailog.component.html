@@ -1,0 +1,15 @@
+<mat-card >
+    <mat-card-header>
+        <div md-card-avatar class="example-header-image"></div>
+        <mat-card-title>Delete</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Do you want to delete?
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+        <button mat-raised-button color="primary"(click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+    </mat-card>

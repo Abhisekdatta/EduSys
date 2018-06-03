@@ -1,0 +1,157 @@
+<div class="maincontainer">
+<mat-card>
+    <mat-card-title>Employee Form</mat-card-title>
+    <form  #form="ngForm" [formGroup]='employeeForm' (ngSubmit)="createEmployee()">
+    <mat-card-content>
+        <mat-accordion class="headers-align">
+            <mat-expansion-panel hideToggle="true" formGroupName="_basic">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Basic Info
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Enter User basic Information 
+                        <mat-icon matTooltip="All Fields are madetory">info</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                    <mat-select placeholder="Salutation" formControlName="_salutation" class="item-single">
+                            <mat-option *ngFor="let salutation of salutations" [value]="salutation">
+                                {{ salutation }}
+                            </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="salutation.touched && salutation.invalid">Salutation is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="First Name" id="firstName" formControlName="_firstName">
+                    <mat-error *ngIf="firstName.touched && firstName.invalid">
+                        <mat-error *ngIf="firstName.errors.required">Employee First Name is required!</mat-error>
+                        <mat-error *ngIf="firstName.errors.minlength">Employee First Name should be {{firstName.errors.minlength.requiredLength}} character .</mat-error> 
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Last Name" id="lastName" formControlName="_lastName">
+                    <mat-error *ngIf="lastName.touched && lastName.invalid">
+                        <mat-error *ngIf="lastName.errors.required">Employee Last Name is required!</mat-error>
+                        <mat-error *ngIf="lastName.errors.minlength">Employee Last Name should be {{lastName.errors.minlength.requiredLength}} character .</mat-error> 
+                    </mat-error>
+                </mat-form-field>
+             </mat-expansion-panel>
+        </mat-accordion>
+        
+
+        <mat-accordion class="headers-align">
+                <mat-expansion-panel hideToggle="false" formGroupName="_address">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Address Info
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Enter User Address Information 
+                            <mat-icon matTooltip="All Fields are madetory">info</mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                <mat-form-field>
+                      <mat-select  placeholder="Country" formControlName="_country">
+                        <mat-option *ngFor="let countryModel of countryModelList" [value]=countryModel._id>
+                            {{countryModel._name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="country.touched && country.invalid">
+                            <mat-error *ngIf="country.errors.required">Country is required!</mat-error>
+                        </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select  placeholder="State" formControlName="_state">
+                      <mat-option *ngFor="let stateModel of stateModelList" [value]=stateModel._id>
+                          {{stateModel._name}}
+                      </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="state.touched && state.invalid">
+                          <mat-error *ngIf="state.errors.required">State is required!</mat-error>
+                      </mat-error>
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-select  placeholder="City" formControlName="_city">
+                  <mat-option *ngFor="let stateModel of stateModelList" [value]=stateModel._id>
+                      {{stateModel._name}}
+                  </mat-option>
+              </mat-select>
+              <mat-error *ngIf="state.touched && state.invalid">
+                      <mat-error *ngIf="state.errors.required">State is required!</mat-error>
+                  </mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field>
+                <input matInput placeholder="Village" formControlName="_village">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Pin No" formControlName="_pin">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Address Line 1" formControlName="_addressLine1">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Address Line 2" formControlName="_addressLine2">
+            </mat-form-field>
+
+
+            </mat-expansion-panel>
+        </mat-accordion>
+                    
+        <mat-accordion class="headers-align">
+        <mat-expansion-panel hideToggle="true" formGroupName="_account">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    User Data
+                </mat-panel-title>
+                <mat-panel-description>
+                    Enter User Information 
+                    <mat-icon matTooltip="if employee want to access the application">info</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+                <div *ngIf="userName.pending">
+                    <section class="example-section">
+                        <mat-progress-bar
+                            class="example-margin"
+                            [color]="color"
+                            [mode]="mode"
+                            [value]="value"
+                            [bufferValue]="bufferValue">
+                        </mat-progress-bar>
+                        </section>
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="User name" formControlName="_userName">
+                    <mat-error *ngIf="userName.touched && userName.invalid">
+                        <mat-error *ngIf="userName.errors.required">User Name is required</mat-error>
+                        <mat-error *ngIf="userName.errors.cannotContainSpace">User Name should not contain space</mat-error>
+                        <mat-error *ngIf="userName.errors.shouldBeUnique">User Name already taken</mat-error>
+                    </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input matInput placeholder="password" [type]="hide ? 'password' : 'text'" formControlName="_password">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+        </mat-expansion-panel>
+        </mat-accordion>
+            <!-- </mat-grid-tile>
+        </mat-grid-list> -->
+        
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Save</button>
+            <button mat-raised-button color="accent" (click)="onNoClick()">Close</button>
+        </mat-card-actions>
+    </form>
+</mat-card>
+</div>

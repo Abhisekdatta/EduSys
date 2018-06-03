@@ -1,0 +1,46 @@
+<div class="sigin-conainer" fxLayout="column" fxLayoutAlign="center center">
+  <div class="sigin-main mat-elevation-z12">
+    <mat-card>
+      <mat-card-title>User Login<a class="redirect" [routerLink]="['/sigup']">Register an account</a></mat-card-title>
+      <mat-card-content>
+        <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+          <!-- <mat-form-field class="full-width">
+            <input matInput type="email" id="email" class="input" placeholder="Email"
+                   formControlName="email" required>
+          </mat-form-field> 
+          <div *ngIf="formErrors.email" class="help is-danger">
+            {{ formErrors.email }}
+          </div>-->
+          <mat-input-container class="full-width">
+          <!-- <mat-form-field class="full-width"> -->
+            <input matInput type="input" id="username" class="username" placeholder="User Name"
+                   formControlName="username" required>
+            <mat-error>{{ formErrors.username }}</mat-error>
+          <!-- </mat-form-field>  -->
+          </mat-input-container>
+          <!-- <div *ngIf="formErrors.email" class="help is-danger">
+            {{ formErrors.username }}
+          </div> -->
+          <mat-input-container class="full-width">
+          <!-- <mat-form-field class="full-width"> -->
+            <input matInput type="password" id="password" class="input" placeholder="Password"
+                   formControlName="password" required>
+            <mat-error>{{ formErrors.password }}</mat-error>
+          <!-- </mat-form-field> -->
+          </mat-input-container>
+          <!-- <div *ngIf="formErrors.password" class="help is-danger">
+            {{ formErrors.password }}
+          </div> -->
+          <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Login</button>
+          <mat-error>{{ errorMessage}}</mat-error>
+        </form>
+
+        <!-- <div class="sign-third">
+          <button mat-raised-button (click)="signInWithGithub()">Github 账号登录</button>
+          <button mat-raised-button (click)="signInWithGoogle()">Google 账号登录</button>
+          <button mat-raised-button (click)="signInAnonymously()">游客 账号登录</button>
+        </div> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
